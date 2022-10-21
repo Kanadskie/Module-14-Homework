@@ -1,0 +1,47 @@
+.form {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 30px auto;
+}
+
+.form-control {
+    width: 150px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    width: 140px;
+    margin: 10px 0 0 0
+}
+
+.msg {
+    text-align: center;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.card {
+    margin: 20px;
+}
+
+/* .card-image {
+
+} */
+
+.card-text {
+    text-align: center;
+    padding: 15px;
+}
+
+.result {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
