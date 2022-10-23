@@ -4,7 +4,7 @@ const btn = document.querySelector('.btn');
 const btnReset = document.querySelector('.btn-reset');
 const resultNode = document.querySelector('.result');
 
-// 2. Делаем запрос XHR вызывающийся функцией useRequest
+// 2. Объявляем функцию, которая делает запрос c помощью XHR
 function useRequest(url, callback) {
     let xhr = new XMLHttpRequest();
 
@@ -28,7 +28,7 @@ function useRequest(url, callback) {
     xhr.send();
 };
 
-// 3. Создаем функцию, которая будет отображать полученные результаты из п.2 в DOM
+// 3. Объявляем функцию, которая будет отображать полученные результаты из п.2 в DOM
 function displayResult(apiData) {
     let cards = '';
 
@@ -48,7 +48,7 @@ function displayResult(apiData) {
       resultNode.innerHTML = cards;
 }
 
-// 4. Создаем функцию showDatа, которая принимает и проверяет введенные в input данные, для вызова функции useRequest
+// 4. Объявляем функцию showDatа, которая принимает и проверяет введенные в input данные, для вызова функции sendRequest
 function showData() {
 
     const inputData = document.querySelector('input').value;
@@ -80,10 +80,10 @@ function showData() {
     resetAll();
 }
 
-// 5. Создаем функцию для очищения введенных в input данных
+// 5. Объявляем функцию для очищения введенных в input данных
 function resetAll() {
     btnReset.addEventListener('click', () => {
-        data = 0;
+        data = "";
         msg.textContent = "";
         resultNode.innerHTML = "";
     })

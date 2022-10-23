@@ -30,15 +30,6 @@
     margin: 20px;
 }
 
-/* .card-image {
-
-} */
-
-.card-text {
-    text-align: center;
-    padding: 15px;
-}
-
 .result {
     display: flex;
     justify-content: center;

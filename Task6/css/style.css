@@ -7,7 +7,7 @@
 }
 
 .form-control {
-    margin: 20px 0;
+    width: 150px;
 }
 
 .buttons {
@@ -22,17 +22,12 @@
 
 .msg {
     text-align: center;
-    margin: 10px 0;
+    margin: 20px 0;
     border-radius: 5px;
 }
 
 .card {
     margin: 20px;
-}
-
-.card-image {
-    width: 198px;
-    height: 132px;
 }
 
 .card-text {
