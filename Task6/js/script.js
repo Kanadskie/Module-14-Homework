@@ -19,7 +19,6 @@ function sendRequest(callback) {
     .then(data => {
         localStorage.setItem('myJSON', JSON.stringify(data))
         writeOutput(formatOutput(data));
-        
       })
   }
 
@@ -28,6 +27,9 @@ function formatOutput(data) {
 
   const imageWidth = document.querySelector('#input1').value;
   const imageHeight = document.querySelector('#input2').value;
+
+  localStorage.setItem('imageWidth', input1.value);
+  localStorage.setItem('imageHeight', input2.value);
 
   let cards = '';
 
@@ -61,15 +63,10 @@ function showData() {
         result.innerHTML = "";
       
       } else {
-        const myJSON = localStorage.getItem('myJSON');
-        if (myJSON) {
-          JSON.parse(myJSON)
-        } else {
+          localStorage.clear();
           sendRequest()
           msg.textContent = "";
-          result.innerHTML = "";
-        }
-
+          result.innerHML = "";
       }
 
   } else {
@@ -84,6 +81,7 @@ function showData() {
 // 5. Объявляем функцию для очищения введенных в input данных
 function resetAll() {
   btnReset.addEventListener('click', () => {
+      localStorage.clear();
       data = "";
       msg.textContent = "";
       result.innerHTML = "";
@@ -92,3 +90,29 @@ function resetAll() {
 
 // 6. Созданем event при нажатии на кнопку "Отправить", которое вызывает функцию showData
 btn.addEventListener('click', showData);
+
+// 7. При перезагрузке странице пользователем и формировании DOM, происходит проверка наличия в localStorage данных последнего запроса,
+// если данные есть, загружаем их
+window.addEventListener('DOMContentLoaded', () => {
+  const myJSON = localStorage.getItem('myJSON');
+
+  if (myJSON) {
+
+    let res = JSON.parse(myJSON);
+
+    let localCards = '';
+
+    res.forEach(function(item, index) {
+      let localCardBlock = `
+      <div class="card">
+      <img src="${res[index].urls.small}" width="${localStorage.getItem('imageWidth')}" height="${localStorage.getItem('imageHeight')}"/>
+      <p class="card-text">${res[index].user.first_name}</p>
+      </div>
+      `;
+      localCards = localCards + localCardBlock;
+    });
+    result.innerHTML = localCards;
+  }
+  resetAll();
+}
+);
