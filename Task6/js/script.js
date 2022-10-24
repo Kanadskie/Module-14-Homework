@@ -1,4 +1,5 @@
 // 1. Получаем элементы DOM
+
 const btn = document.querySelector('.btn');
 const btnReset = document.querySelector('.btn-reset');
 const msg = document.querySelector('.msg');
@@ -7,6 +8,7 @@ const result = document.querySelector('.result');
 const apiKey = "OwdEYwQ-Uv-4dI2uew06efHTSF8tRpgE9U4lWYpZI6A";
 
 // 2. Объявляем функцию, которая делает запрос c помощью fetch
+
 function sendRequest(callback) { 
 
   const numImagesAvailable = 12;
@@ -19,10 +21,11 @@ function sendRequest(callback) {
     .then(data => {
         localStorage.setItem('myJSON', JSON.stringify(data))
         writeOutput(formatOutput(data));
-      })
+    })
   }
 
 // 3. Объявляем функцию, которая будет отображать полученные результаты из п.2 в DOM
+
 function formatOutput(data) {
 
   const imageWidth = document.querySelector('#input1').value;
@@ -33,16 +36,21 @@ function formatOutput(data) {
 
   let cards = '';
 
-    data.forEach(function(item, index) {
-      let cardBlock = `
-      <div class="card">
-      <img src="${data[index].urls.small}" width="${imageWidth}" height="${imageHeight}"/>
-      <p class="card-text">${data[index].user.first_name}</p>
-      </div>
-      `;
-      cards = cards + cardBlock;
-    });
-    return cards;
+  data.forEach(function(item, index) {
+
+    let cardBlock = `
+    <div class="card">
+    <img src="${data[index].urls.small}" width="${imageWidth}" height="${imageHeight}"/>
+    <p class="card-text">${data[index].user.first_name}</p>
+    </div>
+    `;
+
+    cards = cards + cardBlock;
+
+  });
+
+  return cards;
+
 }
 
 function writeOutput(image) {
@@ -50,6 +58,7 @@ function writeOutput(image) {
 }
 
 // 4. Объявляем функцию showDatа, которая принимает и проверяет введенные в input данные, для вызова функции sendRequest
+
 function showData() {
 
   if ((typeof(+input1.value) === 'number' && typeof(+input2.value) === 'number' && !isNaN(+input1.value) && !isNaN(+input2.value))) {
@@ -72,6 +81,7 @@ function showData() {
   } else {
       msg.textContent = "Вы ввели не число";
       result.innerHTML = "";
+
   }
 
   resetAll();
@@ -79,21 +89,27 @@ function showData() {
 }
 
 // 5. Объявляем функцию для очищения введенных в input данных
+
 function resetAll() {
+
   btnReset.addEventListener('click', () => {
-      localStorage.clear();
-      data = "";
-      msg.textContent = "";
-      result.innerHTML = "";
+    localStorage.clear();
+    data = "";
+    msg.textContent = "";
+    result.innerHTML = "";
   })
+
 }
 
 // 6. Созданем event при нажатии на кнопку "Отправить", которое вызывает функцию showData
+
 btn.addEventListener('click', showData);
 
 // 7. При перезагрузке странице пользователем и формировании DOM, происходит проверка наличия в localStorage данных последнего запроса,
 // если данные есть, загружаем их
+
 window.addEventListener('DOMContentLoaded', () => {
+
   const myJSON = localStorage.getItem('myJSON');
 
   if (myJSON) {
@@ -103,16 +119,24 @@ window.addEventListener('DOMContentLoaded', () => {
     let localCards = '';
 
     res.forEach(function(item, index) {
+
       let localCardBlock = `
       <div class="card">
       <img src="${res[index].urls.small}" width="${localStorage.getItem('imageWidth')}" height="${localStorage.getItem('imageHeight')}"/>
       <p class="card-text">${res[index].user.first_name}</p>
       </div>
       `;
+
       localCards = localCards + localCardBlock;
+
     });
+
     result.innerHTML = localCards;
+    
   }
+
   resetAll();
-}
+
+  }
+
 );

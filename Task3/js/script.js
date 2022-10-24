@@ -1,11 +1,14 @@
 // 1. Получаем элементы DOM
+
 const msg = document.querySelector('.msg');
 const btn = document.querySelector('.btn');
 const btnReset = document.querySelector('.btn-reset');
 const resultNode = document.querySelector('.result');
 
 // 2. Объявляем функцию, которая делает запрос c помощью XHR
+
 function useRequest(url, callback) {
+
     let xhr = new XMLHttpRequest();
 
     xhr.open('GET', url, true);
@@ -26,35 +29,38 @@ function useRequest(url, callback) {
     }
 
     xhr.send();
+
 };
 
 // 3. Объявляем функцию, которая будет отображать полученные результаты из п.2 в DOM
+
 function displayResult(apiData) {
+
     let cards = '';
 
     apiData.forEach(item => {
+
         const cardBlock = `
-          <div class="card">
-            <img
-              src="${item.download_url}"
-              class="card-image"
-            />
-            <p class="card-text">${item.author}</p>
-          </div>
+            <div class="card">
+                <img src="${item.download_url}" class="card-image"/>
+                <p class="card-text">${item.author}</p>
+            </div>
         `;
+
         cards = cards + cardBlock;
-      });
+
+    });
         
-      resultNode.innerHTML = cards;
+    resultNode.innerHTML = cards;
+
 }
 
 // 4. Объявляем функцию showDatа, которая принимает и проверяет введенные в input данные, для вызова функции sendRequest
+
 function showData() {
 
     const inputData = document.querySelector('input').value;
     let data = +inputData;
-
-    console.log(data);
 
     if ((typeof(data) === 'number' && !isNaN(data))) {
 
@@ -78,16 +84,21 @@ function showData() {
     }
 
     resetAll();
+
 }
 
 // 5. Объявляем функцию для очищения введенных в input данных
+
 function resetAll() {
+
     btnReset.addEventListener('click', () => {
         data = "";
         msg.textContent = "";
         resultNode.innerHTML = "";
     })
+
 }
 
 // 6. Созданем event при нажатии на кнопку "Отправить", которое вызывает функцию showData
+
 btn.addEventListener('click', showData);

@@ -1,4 +1,5 @@
 // 1. JSON, который мы будем парсить
+
 const jsonString = `
 {
  "list": [
@@ -17,9 +18,11 @@ const jsonString = `
 `;
 
 // 2. Получаем данные
+
 const data = JSON.parse(jsonString);
 
 const list = data.list;
 
 // 3. Выводим полученные данные в консоль
+
 console.log('list:', list);
